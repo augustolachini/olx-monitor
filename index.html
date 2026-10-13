@@ -5,44 +5,24 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>OLX Monitor — Switch RS</title>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
-<meta name="theme-color" content="#eceff4" media="(prefers-color-scheme: light)">
-<meta name="theme-color" content="#0b1020" media="(prefers-color-scheme: dark)">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Newsreader:opsz,wght@6..72,600&family=Instrument+Sans:wght@400;600&display=swap">
+<meta name="theme-color" content="#000000">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&family=Public+Sans:wght@400;600;700&display=swap">
 <style>
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
-/* Paleta e tipografia do mapa-do-universo (claro/escuro automático) */
+/* Tema do mapa-do-universo: preto, grafite, branco e vermelho de destaque */
 :root {
-  --bg:#eceff4; --surface:#ffffff; --s2:#f0f3f9; --s3:#e6ebf5;
-  --border:#d5dbe7; --border-h:#c3c9d6;
-  --txt:#111a2e; --txt-dim:#586179; --muted:#586179; --muted2:#7d859a;
-  --accent:#c9781a; --accent-bg:rgba(201,120,26,.10);
-  --chip-on:#111a2e; --chip-on-ink:#ffffff;
-  --blue:#2a78d6; --green:#16875f; --amber:#c9781a; --red:#d2462a;
-  --grid:#e6e9f0;
-  --serif:"Newsreader",Georgia,"Times New Roman",serif;
-  --sans:"Instrument Sans",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
+  --bg:#000000; --surface:#17171b; --s2:#1f1f23; --s3:#232327;
+  --border:#2e2e32; --border-h:#3a3a40;
+  --txt:#ffffff; --txt-dim:#b9b9bb; --muted:#b9b9bb; --muted2:#959599;
+  --accent:#f64137; --accent-bg:rgba(246,65,55,.12);
+  --chip-on:#ffffff; --chip-on-ink:#000000;
+  --blue:#4c9be8; --green:#2eb482; --amber:#e8a13a; --red:#f64137;
+  --grid:#26262a;
+  --serif:"Inter",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --sans:"Public Sans","Inter",system-ui,-apple-system,"Segoe UI",sans-serif;
   --mono:var(--sans);
-}
-@media (prefers-color-scheme: dark) {
-  :root:not([data-theme="light"]) {
-    --bg:#0b1020; --surface:#141b30; --s2:#1a2340; --s3:#1d2745;
-    --border:#26304d; --border-h:#34405f;
-    --txt:#e8ecf7; --txt-dim:#9aa5c2; --muted:#9aa5c2; --muted2:#6d7898;
-    --accent:#f2a33a; --accent-bg:rgba(242,163,58,.12);
-    --chip-on:#f2a33a; --chip-on-ink:#1a1204;
-    --blue:#3987e5; --green:#2fbf8a; --amber:#f2a33a; --red:#ef6a4c;
-    --grid:#232c47;
-  }
-}
-:root[data-theme="dark"] {
-  --bg:#0b1020; --surface:#141b30; --s2:#1a2340; --s3:#1d2745;
-  --border:#26304d; --border-h:#34405f;
-  --txt:#e8ecf7; --txt-dim:#9aa5c2; --muted:#9aa5c2; --muted2:#6d7898;
-  --accent:#f2a33a; --accent-bg:rgba(242,163,58,.12);
-  --chip-on:#f2a33a; --chip-on-ink:#1a1204;
-  --blue:#3987e5; --green:#2fbf8a; --amber:#f2a33a; --red:#ef6a4c;
-  --grid:#232c47;
+  color-scheme: dark;
 }
 
 body {
@@ -205,6 +185,56 @@ td { padding: 10px 13px; vertical-align: middle; }
   text-decoration: none; padding: 9px 18px; border-radius: 999px;
 }
 
+/* ── Overrides no estilo do mapa ── */
+body { letter-spacing: .005em; }
+.header { padding: 0 14px; padding-top: env(safe-area-inset-top, 0px); }
+.header h1 {
+  font-family: var(--serif); font-weight: 800; text-transform: uppercase;
+  font-size: clamp(30px, 7vw, 48px); letter-spacing: -.02em;
+  margin: 0 -14px 10px; padding: 22px 14px 14px; border-bottom: 1px solid var(--border);
+}
+.header h1::after { content: ""; display: block; width: 56px; height: 3px; background: var(--accent); margin-top: 10px; }
+.kpi, .band, .tbl-box, .modal { border-radius: 6px; }
+.kpi-val { font-family: var(--serif); font-weight: 800; }
+.kpi-lbl, .band-name, .m-clbl, .e-lbl, .e-product-lbl, .pc-name {
+  text-transform: uppercase; letter-spacing: .06em; font-size: 11px;
+}
+.section-label, .sec {
+  font-size: 13px; font-weight: 700; text-transform: uppercase; letter-spacing: .06em;
+  border-left: 3px solid var(--accent); padding-left: 9px;
+}
+.sec { border-top: 0; padding-top: 0; margin-top: 14px; }
+.band.active { border-color: var(--accent); background: var(--accent-bg); }
+/* filtros como abas: texto em caixa alta com sublinhado vermelho */
+.pills { gap: 2px; border-bottom: 1px solid var(--border); flex-basis: 100%; order: 3; }
+.pill {
+  background: none; border: 0; border-bottom: 3px solid transparent; border-radius: 0;
+  color: var(--muted); font-weight: 700; font-size: 13px; text-transform: uppercase;
+  letter-spacing: .08em; padding: 12px 12px 10px; min-height: 0;
+}
+.pill:hover { color: #fff; }
+.pill.on { background: none; color: #fff; border-bottom-color: var(--accent); }
+.f-count { order: 4; }
+#btn-sku { order: 5; }
+.f-hint { order: 6; }
+.search-box input, .filtros select { border-radius: 4px; background: #0d0d10; border-color: #3a3a40; }
+#btn-sku {
+  border-radius: 4px !important; background: transparent !important; color: #fff !important;
+  border: 1px solid rgba(255,255,255,.42) !important; font-weight: 600 !important; min-height: 40px;
+}
+#btn-sku:hover { border-color: #fff !important; background: rgba(255,255,255,.07) !important; }
+.badge, .sku-loja-tag { border-radius: 4px; }
+thead { background: var(--surface); }
+th { text-transform: uppercase; letter-spacing: .06em; font-size: 11px; }
+tbody tr:hover { background: var(--s2); }
+.t-data.today { color: var(--accent); }
+.m-title, .e-product-name, .sku-hdr-name { font-family: var(--serif); font-weight: 800; letter-spacing: -.01em; }
+.enrich-box { border-radius: 4px; border-left: 3px solid var(--accent); }
+.m-cell, .e-cell, .price-card { border-radius: 4px; }
+.m-link { background: var(--accent); color: #fff; border-radius: 4px; font-weight: 700; }
+.m-link:hover { background: #ff5b50; }
+:focus-visible { outline: 2px solid #fff !important; outline-offset: 2px; }
+
 /* ── Celular: tabela vira lista de cards ── */
 @media (max-width: 640px) {
   .kpi-row { grid-template-columns: repeat(2, 1fr); }
@@ -234,7 +264,7 @@ td { padding: 10px 13px; vertical-align: middle; }
   #tabela tr.sku-header td { display: block; border-radius: 12px; }
   #tabela tr.sku-header + tr, #tabela td[colspan] { display: block; }
   .modal-bg.open { align-items: flex-end; }
-  .modal { width: 100%; max-height: 92vh; border-radius: 18px 18px 0 0; padding: 18px 14px calc(18px + env(safe-area-inset-bottom, 0px)); }
+  .modal { width: 100%; max-height: 92vh; border-radius: 8px 8px 0 0; padding: 18px 14px calc(18px + env(safe-area-inset-bottom, 0px)); }
   .m-meta { grid-template-columns: repeat(2, 1fr); }
   .prices-grid { grid-template-columns: repeat(2, 1fr); }
   .enrich-box { flex-direction: column; align-items: flex-start; }
@@ -247,7 +277,7 @@ td { padding: 10px 13px; vertical-align: middle; }
 <!-- Header -->
 <header class="header">
   <h1>OLX Monitor · Nintendo Switch RS</h1>
-  <p class="sub">Anúncios da OLX no RS com preço de referência por IA · atualizado 12/10/2026 22:03</p>
+  <p class="sub">Anúncios da OLX no RS com preço de referência por IA · atualizado 12/10/2026 22:05</p>
 </header>
 
 <!-- KPIs -->
@@ -843,7 +873,7 @@ function abrirModal(id) {
 
   // Monta barras: OLX atual + cada concorrente
   const barEntries = [];
-  if (a.preco_num) barEntries.push({ label:'Este anúncio', preco:a.preco_num, cor:'#2a78d6', corBg:'rgba(42,120,214,.8)' });
+  if (a.preco_num) barEntries.push({ label:'Este anúncio', preco:a.preco_num, cor:'#f64137', corBg:'rgba(246,65,55,.85)' });
   const lojaOrdem = [
     ['mercadolivre', 'Mercado Livre', '#f5e642', 'rgba(245,230,66,.75)'],
     ['kabum',        'KaBuM',         '#ff6a00', 'rgba(255,106,0,.75)'  ],
