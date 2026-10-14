@@ -252,6 +252,83 @@ tbody tr:hover { background: var(--s2); }
 .m-chart-sub { color: var(--muted); font-size: 12.5px; margin: -2px 0 8px; }
 .chart-wrap { height: 220px; }
 
+/* ── Controles (redesign) ── */
+.ctl { max-width: 1000px; margin: 0 auto; padding: 16px 14px 6px; display: flex; flex-direction: column; gap: 10px; }
+.ctl .search-box { max-width: none; }
+.ctl .search-box input { width: 100%; }
+.ctl .pills { order: 0; flex-basis: auto; }
+.chips { display: flex; gap: 6px; overflow-x: auto; -webkit-overflow-scrolling: touch; padding-bottom: 2px; }
+.chip {
+  flex: 0 0 auto; font: inherit; font-size: 13.5px; font-weight: 600; cursor: pointer;
+  color: #fff; background: transparent; border: 1px solid rgba(255,255,255,.3);
+  border-radius: 4px; padding: 7px 14px; min-height: 36px;
+}
+.chip.on { background: #fff; color: #000; border-color: #fff; }
+.ctl-row { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+.ctl-row input, .sel-wrap select {
+  font: inherit; color: var(--txt); background: #0d0d10; border: 1px solid #3a3a40;
+  border-radius: 4px; padding: 8px 12px; min-height: 40px; width: 100%; min-width: 0;
+}
+.sel-wrap { display: flex; flex-direction: column; gap: 3px; min-width: 0; }
+.sel-wrap span { font-size: 11px; text-transform: uppercase; letter-spacing: .06em; color: var(--muted); }
+.toggles { grid-template-columns: 1fr; gap: 6px; }
+.tgl { display: flex; align-items: center; gap: 8px; font-size: 14px; color: var(--muted); cursor: pointer; }
+.tgl input { width: 18px; height: 18px; accent-color: var(--accent); }
+.ctl-foot { display: flex; justify-content: space-between; align-items: center; }
+.lnk { background: none; border: 0; color: var(--muted); text-decoration: underline; font: inherit; font-size: 13px; cursor: pointer; padding: 6px 0; }
+.lnk:hover { color: #fff; }
+
+/* ── Lista de cards ── */
+.lista { max-width: 1000px; margin: 0 auto; padding: 4px 14px 48px; display: grid; gap: 8px; }
+@media (min-width: 760px) { .lista { grid-template-columns: 1fr 1fr; } .grupo { grid-column: 1 / -1; } .grupo .card-ad + .card-ad { margin-top: 0; } }
+.card-ad {
+  display: grid; grid-template-columns: 74px 1fr; gap: 12px; align-items: start;
+  background: var(--surface); border: 1px solid var(--border); border-left: 3px solid var(--border);
+  border-radius: 6px; padding: 12px; cursor: pointer; min-width: 0;
+}
+.card-ad:hover { border-color: #4a4a52; }
+.card-ad.t-top  { border-left-color: var(--green); }
+.card-ad.t-bom  { border-left-color: rgba(46,180,130,.5); }
+.card-ad.t-caro { border-left-color: rgba(246,65,55,.6); }
+.card-ad.off { opacity: .55; }
+.selo { border-radius: 4px; padding: 8px 4px; text-align: center; background: var(--s3); }
+.selo b { display: block; font-family: var(--serif); font-weight: 800; font-size: 20px; line-height: 1.05; font-variant-numeric: tabular-nums; }
+.selo span { display: block; font-size: 10.5px; text-transform: uppercase; letter-spacing: .04em; color: var(--muted); margin-top: 2px; }
+.selo.top    { background: rgba(46,180,130,.18); } .selo.top b { color: var(--green); }
+.selo.bom    { background: rgba(46,180,130,.08); } .selo.bom b { color: var(--green); }
+.selo.caro   { background: rgba(246,65,55,.12); }  .selo.caro b { color: var(--red); }
+.selo.nd b   { color: var(--muted); font-size: 16px; }
+.ad-main { min-width: 0; }
+.ad-tit {
+  font-size: 15px; font-weight: 600; line-height: 1.3; margin: 0;
+  display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden;
+  overflow-wrap: anywhere;
+}
+.ad-prod { font-size: 12.5px; color: var(--muted); margin-top: 1px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.ad-preco { display: flex; flex-wrap: wrap; align-items: baseline; gap: 2px 10px; margin-top: 6px; }
+.ad-val { font-family: var(--serif); font-weight: 800; font-size: 20px; font-variant-numeric: tabular-nums; }
+.ad-med { font-size: 12.5px; color: var(--muted); }
+.faixa { position: relative; margin: 10px 0 2px; padding-bottom: 16px; }
+.faixa-trilho { height: 4px; border-radius: 2px; background: linear-gradient(90deg, rgba(46,180,130,.55), rgba(255,255,255,.15) 50%, rgba(246,65,55,.55)); }
+.faixa-med { position: absolute; top: -3px; width: 2px; height: 10px; background: #e8a13a; transform: translateX(-1px); }
+.faixa-pt { position: absolute; top: -4px; width: 12px; height: 12px; border-radius: 50%; background: #fff; border: 2px solid #000; transform: translateX(-6px); }
+.faixa-pt.top, .faixa-pt.bom { background: var(--green); }
+.faixa-pt.caro { background: var(--red); }
+.faixa-lbl { position: absolute; left: 0; right: 0; top: 8px; display: flex; justify-content: space-between; font-size: 10.5px; color: var(--muted2); font-variant-numeric: tabular-nums; }
+.ad-meta { display: flex; flex-wrap: wrap; align-items: center; gap: 4px 10px; margin-top: 6px; font-size: 12.5px; color: var(--muted); }
+.ad-meta .hoje { color: var(--accent); font-weight: 600; }
+.st { display: inline-flex; align-items: center; gap: 5px; font-weight: 600; }
+.st::before { content: ""; width: 7px; height: 7px; border-radius: 50%; background: currentColor; }
+.st.on { color: var(--green); } .st.off { color: var(--muted2); }
+.cat { border: 1px solid var(--border); border-radius: 4px; padding: 0 6px; }
+.ad-link { margin-left: auto; color: #fff; text-decoration: none; font-weight: 600; padding: 2px 0; }
+.ad-link:hover { color: var(--accent); }
+.grupo { display: grid; gap: 8px; margin-top: 10px; }
+.grupo-h { border-left: 3px solid var(--accent); padding: 2px 0 2px 10px; }
+.grupo-h h2 { font-family: var(--serif); font-weight: 800; font-size: 17px; margin: 0; }
+.grupo-h p { margin: 2px 0 0; font-size: 12.5px; color: var(--muted); }
+.vazio { grid-column: 1 / -1; text-align: center; color: var(--muted); padding: 40px 10px; }
+
 /* ── Celular: tabela vira lista de cards ── */
 @media (max-width: 640px) {
   .kpi-row { grid-template-columns: repeat(2, 1fr); }
@@ -296,7 +373,7 @@ tbody tr:hover { background: var(--s2); }
 <!-- Header -->
 <header class="header">
   <h1>Monitor OLX</h1>
-  <p class="sub">Anúncios da OLX no RS com preço de referência por IA · atualizado 13/10/2026 22:00</p>
+  <p class="sub">Anúncios da OLX no RS com preço de referência por IA · atualizado 14/10/2026 19:37</p>
 </header>
 
 <!-- KPIs -->
@@ -314,92 +391,76 @@ tbody tr:hover { background: var(--s2); }
     <div class="kpi-lbl">Postados hoje</div>
   </div>
   <div class="kpi gray">
-    <div class="kpi-val gray">1726</div>
-    <div class="kpi-lbl">Inativos / sumidos</div>
+    <div class="kpi-val green" id="kpi-op">—</div>
+    <div class="kpi-lbl">Oportunidades (≥15% abaixo)</div>
   </div>
 </div>
 
-<!-- Search bands -->
-<div class="bands-section">
-  <div class="section-label">Médias por busca</div>
-  <div class="bands" id="bands"></div>
-</div>
-
-<!-- ML Competitor Prices -->
-<div class="bands-section" id="ml-section" style="display:none">
-  <div class="section-label">📊 Mercado Livre — histórico de preços da concorrência</div>
-  <div style="overflow-x:auto;padding:8px 0">
-    <table id="ml-table" style="width:100%;border-collapse:collapse;font-size:13px;">
-      <thead>
-        <tr style="border-bottom:1px solid var(--border);">
-          <th style="padding:8px 12px;text-align:left;color:var(--txt-dim);font-weight:600;">Produto</th>
-          <th style="padding:8px 12px;text-align:left;color:var(--txt-dim);font-weight:600;">Busca</th>
-          <th style="padding:8px 12px;text-align:right;color:var(--txt-dim);font-weight:600;">Mín ML</th>
-          <th style="padding:8px 12px;text-align:right;color:var(--txt-dim);font-weight:600;">Médio ML</th>
-          <th style="padding:8px 12px;text-align:right;color:var(--txt-dim);font-weight:600;">Itens</th>
-          <th style="padding:8px 12px;text-align:left;color:var(--txt-dim);font-weight:600;">Coletado em</th>
-        </tr>
-      </thead>
-      <tbody id="ml-tbody"></tbody>
-    </table>
-  </div>
-</div>
-
-<!-- Filters -->
-<div class="filtros">
+<!-- Controles -->
+<div class="ctl">
   <div class="search-box">
     <span class="search-icon">🔍</span>
-    <input type="text" id="busca-input" placeholder="Buscar por título...">
+    <input type="search" id="busca-input" placeholder="Buscar por título ou produto">
   </div>
-  <select id="filtro-busca"><option value="">Todas as buscas</option></select>
-  <div class="pills">
-    <span class="pill on"  data-st="ativo"   onclick="setPill(this,'ativo')">Ativos</span>
-    <span class="pill"     data-st="hoje"    onclick="setPill(this,'hoje')">Hoje</span>
-    <span class="pill"     data-st=""        onclick="setPill(this,'')">Todos</span>
-    <span class="pill"     data-st="inativo" onclick="setPill(this,'inativo')">Inativos</span>
+
+  <div class="pills" role="tablist">
+    <span class="pill on" data-st="ativo"   onclick="setPill(this,'ativo')">Ativos</span>
+    <span class="pill"    data-st="hoje"    onclick="setPill(this,'hoje')">Hoje</span>
+    <span class="pill"    data-st=""        onclick="setPill(this,'')">Todos</span>
+    <span class="pill"    data-st="inativo" onclick="setPill(this,'inativo')">Inativos</span>
   </div>
-  <div class="f-num">
-    <input type="number" id="f-pmin" inputmode="numeric" placeholder="Preço mín">
-    <input type="number" id="f-pmax" inputmode="numeric" placeholder="Preço máx">
-    <select id="f-pct">
-      <option value="">Qualquer % vs mediana</option>
-      <option value="-10">10% ou mais abaixo</option>
-      <option value="-20">20% ou mais abaixo</option>
-      <option value="-30">30% ou mais abaixo</option>
-      <option value="-50">50% ou mais abaixo</option>
-      <option value="abaixo">Abaixo da mediana</option>
-      <option value="acima">Acima da mediana</option>
-    </select>
+
+  <div class="chips" id="chips-cat">
+    <button class="chip on" data-cat="">Tudo</button>
+    <button class="chip" data-cat="jogo">Jogos</button>
+    <button class="chip" data-cat="console">Consoles</button>
+    <button class="chip" data-cat="acessorio">Acessórios</button>
+    <button class="chip" data-cat="outro">Outros</button>
   </div>
-  <span class="f-count" id="contagem"></span>
-  <button id="btn-sku" onclick="toggleSkuGroup()" style="
-    margin-left:auto; background:var(--surface); color:var(--muted);
-    border:1px solid var(--border); border-radius:8px; padding:5px 12px;
-    font-size:11px; font-weight:600; cursor:pointer; transition:all .14s;
-    letter-spacing:.04em;">
-    ⬡ Agrupar por SKU
-  </button>
-  <span class="f-hint"><kbd>/</kbd> buscar &nbsp; <kbd>Esc</kbd> fechar</span>
+
+  <div class="ctl-row">
+    <label class="sel-wrap">
+      <span>Ordenar</span>
+      <select id="f-sort">
+        <option value="desconto">Maior desconto vs mediana</option>
+        <option value="recentes">Mais recentes</option>
+        <option value="preco_asc">Menor preço</option>
+        <option value="preco_desc">Maior preço</option>
+        <option value="hist">Mais histórico (mediana confiável)</option>
+      </select>
+    </label>
+    <label class="sel-wrap">
+      <span>% vs mediana</span>
+      <select id="f-pct">
+        <option value="">Qualquer</option>
+        <option value="-10">10% ou mais abaixo</option>
+        <option value="-20">20% ou mais abaixo</option>
+        <option value="-30">30% ou mais abaixo</option>
+        <option value="-50">50% ou mais abaixo</option>
+        <option value="abaixo">Abaixo da mediana</option>
+        <option value="acima">Acima da mediana</option>
+      </select>
+    </label>
+  </div>
+
+  <div class="ctl-row">
+    <input type="number" id="f-pmin" inputmode="numeric" placeholder="Preço mín (R$)">
+    <input type="number" id="f-pmax" inputmode="numeric" placeholder="Preço máx (R$)">
+  </div>
+
+  <div class="ctl-row toggles">
+    <label class="tgl"><input type="checkbox" id="f-conf" checked> Só mediana confiável (3+ anúncios)</label>
+    <label class="tgl"><input type="checkbox" id="f-grp"> Agrupar por produto</label>
+  </div>
+
+  <div class="ctl-foot">
+    <span class="f-count" id="contagem"></span>
+    <button class="lnk" id="f-reset" type="button">Limpar filtros</button>
+  </div>
 </div>
 
-<!-- Table -->
-<div class="tabela-wrap">
-  <div class="tbl-box">
-    <table id="tabela">
-      <thead>
-        <tr>
-          <th onclick="ordenar('titulo')">Título<span class="sarr">↕</span></th>
-          <th onclick="ordenar('preco_num')">Preço<span class="sarr">↕</span></th>
-          <th onclick="ordenar('cidade')">Local<span class="sarr">↕</span></th>
-          <th onclick="ordenar('data_postagem')">Postado<span class="sarr">↕</span></th>
-          <th onclick="ordenar('_pct')">vs mediana<span class="sarr">↕</span></th>
-          <th>Categoria</th>
-        </tr>
-      </thead>
-      <tbody id="tbody"></tbody>
-    </table>
-  </div>
-</div>
+<!-- Lista -->
+<main class="lista" id="lista"></main>
 
 <!-- Modal -->
 <div class="modal-bg" id="modal-bg" onclick="fecharModal(event)">
@@ -539,30 +600,6 @@ function isHoje(dp) {
   return m ? m[1]===HOJE : false;
 }
 
-// ── bands ─────────────────────────────────────────────────────────────────────
-function renderBands() {
-  const wrap = document.getElementById('bands');
-  const sel  = document.getElementById('filtro-busca');
-  Object.entries(DADOS.medias).forEach(([busca, info]) => {
-    const el = document.createElement('div');
-    el.className = 'band';
-    el.innerHTML = `
-      <div class="band-name">${busca||'Sem busca'}</div>
-      <div class="band-val">R$ ${info.media.toLocaleString('pt-BR')}</div>
-      <div class="band-range">${info.qtd} itens · R$${(info.minimo||0).toLocaleString('pt-BR')} – R$${(info.maximo||0).toLocaleString('pt-BR')}</div>`;
-    el.onclick = () => {
-      document.querySelectorAll('.band').forEach(b => b.classList.remove('active'));
-      const s = document.getElementById('filtro-busca');
-      if (s.value===busca) { s.value=''; } else { s.value=busca; el.classList.add('active'); }
-      aplicarFiltros();
-    };
-    wrap.appendChild(el);
-    const opt = document.createElement('option');
-    opt.value=busca; opt.textContent=busca||'(sem busca)';
-    sel.appendChild(opt);
-  });
-}
-
 // ── mediana por SKU (anúncios ativos + históricos) ─────────────────────────────
 const SKU_ADS = {};
 DADOS.anuncios.forEach(a => {
@@ -572,227 +609,177 @@ DADOS.anuncios.forEach(a => {
 const SKU_MED = {};
 Object.entries(SKU_ADS).forEach(([k, ads]) => {
   const v = ads.map(a=>a.preco_num).sort((x,y)=>x-y), n = v.length;
-  SKU_MED[k] = { med: n%2 ? v[(n-1)/2] : (v[n/2-1]+v[n/2])/2, n };
+  SKU_MED[k] = { med: n%2 ? v[(n-1)/2] : (v[n/2-1]+v[n/2])/2, n, min: v[0], max: v[n-1] };
 });
+const CAT_GRUPO = { jogo:'jogo', console:'console', bundle:'console',
+                    'acessório':'acessorio', 'periférico':'acessorio', 'peça':'acessorio' };
 DADOS.anuncios.forEach(a => {
   const m = a.sku_id!=null ? SKU_MED[a.sku_id] : null;
-  a._med = m ? m.med : null;
-  a._n   = m ? m.n : 0;
-  a._pct = (m && a.preco_num) ? Math.round((a.preco_num/m.med - 1)*100) : null;
+  const e = a.enriquecimento||{};
+  a._med  = m ? m.med : null;
+  a._n    = m ? m.n : 0;
+  a._min  = m ? m.min : null;
+  a._max  = m ? m.max : null;
+  a._pct  = (m && a.preco_num) ? Math.round((a.preco_num/m.med - 1)*100) : null;
+  a._conf = a._n >= 3;
+  a._cat  = CAT_GRUPO[e.categoria] || 'outro';
+  a._nome = e.nome_normalizado || '';
 });
 const brl = v => 'R$ '+Math.round(v).toLocaleString('pt-BR');
-function vsTxt(a) {
-  if (a._pct==null) return '<span class="p-vs eq">sem mediana</span>';
-  const cls = a._pct<0 ? 'dn' : (a._pct>0 ? 'up' : 'eq');
-  const pct = a._pct>0 ? '+'+a._pct+'%' : (a._pct<0 ? '−'+Math.abs(a._pct)+'%' : '0%');
-  return `<span class="p-vs ${cls}"><b>${pct}</b> vs mediana ${brl(a._med)}</span>`+
-         `<span class="p-n"> · ${a._n} anúncio${a._n>1?'s':''}</span>`;
-}
+const escH = t => String(t??'').replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
 
-// ── badges ────────────────────────────────────────────────────────────────────
-function rowBadges(a) {
+// KPI de oportunidades
+document.getElementById('kpi-op').textContent =
+  DADOS.anuncios.filter(a => a.ativo && a._conf && a._pct!=null && a._pct<=-15).length;
+
+// mantidos para o init existente
+function renderBands() {}
+
+// ── card ──────────────────────────────────────────────────────────────────────
+function tom(a) {
+  if (a._pct==null || !a._conf) return 'nd';
+  if (a._pct <= -15) return 'top';
+  if (a._pct < 0)    return 'bom';
+  if (a._pct <= 10)  return 'neutro';
+  return 'caro';
+}
+function selo(a) {
+  if (a._pct==null) return `<div class="selo nd"><b>—</b><span>sem mediana</span></div>`;
+  if (!a._conf)     return `<div class="selo nd"><b>${a._pct>0?'+':''}${a._pct}%</b><span>pouco histórico</span></div>`;
+  if (a._pct < 0)   return `<div class="selo ${tom(a)}"><b>−${Math.abs(a._pct)}%</b><span>abaixo</span></div>`;
+  if (a._pct === 0) return `<div class="selo neutro"><b>0%</b><span>na mediana</span></div>`;
+  return `<div class="selo ${tom(a)}"><b>+${a._pct}%</b><span>acima</span></div>`;
+}
+function faixa(a) {
+  // posição do preço na faixa min–max do produto, com marcador da mediana
+  if (!a._conf || a._max==null || a._max<=a._min || !a.preco_num) return '';
+  const pos = v => Math.max(0, Math.min(100, (v - a._min) / (a._max - a._min) * 100));
+  return `<div class="faixa" title="Faixa do produto: ${brl(a._min)} a ${brl(a._max)}">
+    <div class="faixa-trilho"></div>
+    <div class="faixa-med" style="left:${pos(a._med)}%"></div>
+    <div class="faixa-pt ${tom(a)}" style="left:${pos(a.preco_num)}%"></div>
+    <div class="faixa-lbl"><span>${brl(a._min)}</span><span>mediana ${brl(a._med)}</span><span>${brl(a._max)}</span></div>
+  </div>`;
+}
+function card(a, semNome=false) {
+  const hoje = isHoje(a.data_postagem);
   const e = a.enriquecimento||{};
-  let b = '';
-  if (!a.ativo)    b += '<span class="badge b-off">Inativo</span> ';
-  if (e.categoria) b += `<span class="badge b-cat">${e.categoria}</span>`;
-  return b;
-}
-
-// ── row builder ───────────────────────────────────────────────────────────────
-function buildRow(a, hideSkuSub=false) {
-  const isH    = isHoje(a.data_postagem);
-  const e      = a.enriquecimento||{};
-  const sub    = hideSkuSub ? '' : (e.nome_normalizado||'');
-  const precoVs = `<div class="p-vsline">${vsTxt(a)}</div>`;
-  return `<tr onclick="abrirModal('${a.olx_id}')" class="${a.ativo?'':'inactive'}">
-    <td class="t-titulo">
-      <a class="t-link" href="${a.url}" target="_blank" onclick="event.stopPropagation()">
-        ${(a.titulo||'').slice(0,58)}${(a.titulo||'').length>58?'…':''}
-      </a>
-      ${sub?`<div class="t-sub">${sub.slice(0,52)}</div>`:''}
-    </td>
-    <td class="t-preco">
-      <div class="p-val">${a.preco_atual||'?'}</div>
-      ${precoVs}
-    </td>
-    <td class="t-local">
-      ${a.cidade||'?'}
-      ${a.bairro?`<div class="t-bairro">${a.bairro}</div>`:''}
-    </td>
-    <td class="t-data${isH?' today':''}">${fmtData(a.data_postagem)}</td>
-    <td class="t-busca t-pct ${a._pct<0?'dn':(a._pct>0?'up':'')}">${a._pct==null?'—':(a._pct>0?'+':'')+a._pct+'%'}</td>
-    <td style="white-space:nowrap">${rowBadges(a)}</td>
-  </tr>`;
-}
-
-// ── SKU group header ──────────────────────────────────────────────────────────
-const LOJA_STYLE = {
-  mercadolivre: 'background:#856d00;color:#f5e642',
-  kabum:        'background:#7a3200;color:#ff9a5c',
-  amazon_br:    'background:#7a4a00;color:#ffb84d',
-  olx:          'background:#3b1fa8;color:#c4b5fd',
-  enjoei:       'background:#7b1058;color:#f9a8d4',
-};
-
-function skuLojasTags(skuId) {
-  const sp = DADOS.sku_precos && skuId ? DADOS.sku_precos[String(skuId)] : null;
-  if (!sp) return '';
-  const pl = sp.por_loja || {};
-  return Object.entries(pl).filter(([,v])=>v).map(([k,v]) => {
-    const st = LOJA_STYLE[k] || 'background:var(--s3);color:var(--muted)';
-    const nome = {mercadolivre:'ML', kabum:'KaBuM', amazon_br:'AMZ', olx:'OLX', enjoei:'Enjoei'}[k]||k;
-    return `<span class="sku-loja-tag" style="${st}">${nome} R$${Number(v).toLocaleString('pt-BR')}</span>`;
-  }).join('');
-}
-
-function buildSkuHeader(skuNome, itens, skuId) {
-  const e0      = itens[0]?.enriquecimento || {};
-  const cat     = e0.categoria || '';
-  const precos  = itens.map(a=>a.preco_num).filter(Boolean);
-  const pMin    = precos.length ? Math.min(...precos) : null;
-  const pMax    = precos.length ? Math.max(...precos) : null;
-  const m       = skuId ? SKU_MED[skuId] : null;
-  const lojas   = '';
-  const metaTxt = [
-    `${itens.length} anúncio${itens.length>1?'s':''}`,
-    m ? `mediana ${brl(m.med)} (${m.n} no histórico)` : '',
-    pMin && pMax ? `${brl(pMin)} – ${brl(pMax)}` : '',
-    cat,
-  ].filter(Boolean).join(' · ');
-
-  return `<tr class="sku-header">
-    <td colspan="6">
-      <div class="sku-hdr-inner">
-        <div>
-          <div class="sku-hdr-name">${skuNome}</div>
-          <div class="sku-hdr-meta">${metaTxt}</div>
-        </div>
-        ${lojas ? `<div class="sku-hdr-lojas">${lojas}</div>` : ''}
+  return `<article class="card-ad ${a.ativo?'':'off'} t-${tom(a)}" onclick="abrirModal('${a.olx_id}')">
+    ${selo(a)}
+    <div class="ad-main">
+      <div class="ad-top">
+        <h3 class="ad-tit">${escH(a.titulo)}</h3>
       </div>
-    </td>
-  </tr>`;
+      ${(!semNome && a._nome) ? `<div class="ad-prod">${escH(a._nome)}</div>` : ''}
+      <div class="ad-preco">
+        <span class="ad-val">${escH(a.preco_atual||'?')}</span>
+        ${a._med!=null ? `<span class="ad-med">mediana ${brl(a._med)} · ${a._n} anúncio${a._n>1?'s':''}</span>` : ''}
+      </div>
+      ${faixa(a)}
+      <div class="ad-meta">
+        <span class="st ${a.ativo?'on':'off'}">${a.ativo?'Ativo':'Inativo'}</span>
+        <span class="${hoje?'hoje':''}">${escH(fmtData(a.data_postagem))}</span>
+        <span>${escH(a.cidade||'?')}</span>
+        ${e.categoria ? `<span class="cat">${escH(e.categoria)}</span>` : ''}
+        <a class="ad-link" href="${escH(a.url)}" target="_blank" rel="noopener" onclick="event.stopPropagation()">OLX ↗</a>
+      </div>
+    </div>
+  </article>`;
 }
 
-// ── table render ─────────────────────────────────────────────────────────────
-function renderTabela(lista) {
-  document.getElementById('contagem').textContent = lista.length+' item(s)';
-
-  if (!skuGroup) {
-    document.getElementById('tbody').innerHTML = lista.map(a => buildRow(a)).join('');
+// ── lista ─────────────────────────────────────────────────────────────────────
+function renderLista(lista) {
+  const el = document.getElementById('lista');
+  document.getElementById('contagem').textContent =
+    lista.length + ' anúncio' + (lista.length===1?'':'s');
+  if (!lista.length) {
+    el.innerHTML = `<div class="vazio">Nenhum anúncio com esses filtros.<br><button class="lnk" onclick="limparFiltros()">Limpar filtros</button></div>`;
     return;
   }
+  if (!skuGroup) { el.innerHTML = lista.map(a => card(a)).join(''); return; }
 
-  // Agrupa por sku_id / nome_normalizado
-  const grupos = new Map();   // chave → {nome, skuId, itens[]}
-  const semSku = [];
-
+  const grupos = new Map();
   lista.forEach(a => {
-    const e    = a.enriquecimento || {};
-    const nome = e.nome_normalizado;
-    const sid  = a.sku_id != null ? String(a.sku_id) : null;
-    const key  = sid || nome || '__sem_sku__';
-    if (!nome && !sid) { semSku.push(a); return; }
-    if (!grupos.has(key)) grupos.set(key, { nome: nome||'Sem SKU', skuId: sid, itens:[] });
-    grupos.get(key).itens.push(a);
+    const k = a.sku_id!=null ? 's'+a.sku_id : 'x';
+    if (!grupos.has(k)) grupos.set(k, { nome: a._nome || 'Sem identificação', ref: a, itens: [] });
+    grupos.get(k).itens.push(a);
   });
-
-  // Ordena grupos: mais itens primeiro
-  const sorted = [...grupos.values()].sort((a,b) => b.itens.length - a.itens.length);
-
-  let html = '';
-  sorted.forEach(g => {
-    html += buildSkuHeader(g.nome, g.itens, g.skuId);
-    g.itens.forEach(a => { html += buildRow(a, true); });
-  });
-  if (semSku.length) {
-    html += `<tr class="sku-header"><td colspan="6">
-      <div class="sku-hdr-inner"><div>
-        <div class="sku-hdr-name">Sem identificação</div>
-        <div class="sku-hdr-meta">${semSku.length} anúncio(s)</div>
-      </div></div></td></tr>`;
-    semSku.forEach(a => { html += buildRow(a, false); });
-  }
-  document.getElementById('tbody').innerHTML = html;
+  // grupos na ordem do primeiro item (respeita a ordenação escolhida)
+  el.innerHTML = [...grupos.values()].map(g => `
+    <section class="grupo">
+      <header class="grupo-h">
+        <h2>${escH(g.nome)}</h2>
+        <p>${g.itens.length} na lista${g.ref._med!=null ? ` · mediana ${brl(g.ref._med)} (${g.ref._n} no histórico)` : ''}</p>
+      </header>
+      ${g.itens.map(a => card(a, true)).join('')}
+    </section>`).join('');
 }
 
-// ── toggle SKU group ──────────────────────────────────────────────────────────
-function toggleSkuGroup() {
-  skuGroup = !skuGroup;
-  const btn = document.getElementById('btn-sku');
-  if (skuGroup) {
-    btn.style.background  = 'var(--accent)';
-    btn.style.color       = '#fff';
-    btn.style.borderColor = 'var(--accent)';
-    // No modo SKU, força ordenação por nome_normalizado
-    sortCol = 'primeira_coleta'; sortAsc = false;
-  } else {
-    btn.style.background  = 'var(--surface)';
-    btn.style.color       = 'var(--muted)';
-    btn.style.borderColor = 'var(--border)';
-  }
-  ordenarERenderer();
-}
-
-// ── pills ─────────────────────────────────────────────────────────────────────
+// ── estado / filtros ──────────────────────────────────────────────────────────
+let activeCat = '';
 function setPill(el, st) {
   document.querySelectorAll('.pill').forEach(p => p.classList.remove('on'));
   el.classList.add('on');
   activeSt = st;
   aplicarFiltros();
 }
-
-// ── filters ───────────────────────────────────────────────────────────────────
+document.querySelectorAll('#chips-cat .chip').forEach(b => b.onclick = () => {
+  document.querySelectorAll('#chips-cat .chip').forEach(x => x.classList.remove('on'));
+  b.classList.add('on'); activeCat = b.dataset.cat; aplicarFiltros();
+});
 function aplicarFiltros() {
-  const txt   = document.getElementById('busca-input').value.toLowerCase();
-  const busca = document.getElementById('filtro-busca').value;
-  const pmin  = parseFloat(document.getElementById('f-pmin').value);
-  const pmax  = parseFloat(document.getElementById('f-pmax').value);
-  const fpct  = document.getElementById('f-pct').value;
+  const txt  = document.getElementById('busca-input').value.trim().toLowerCase();
+  const pmin = parseFloat(document.getElementById('f-pmin').value);
+  const pmax = parseFloat(document.getElementById('f-pmax').value);
+  const fpct = document.getElementById('f-pct').value;
+  const conf = document.getElementById('f-conf').checked;
+  skuGroup   = document.getElementById('f-grp').checked;
   filtrados = DADOS.anuncios.filter(a => {
+    if (txt && !((a.titulo||'').toLowerCase().includes(txt) || a._nome.toLowerCase().includes(txt))) return false;
+    if (activeSt==='hoje'    && !isHoje(a.data_postagem)) return false;
+    if (activeSt==='ativo'   && !a.ativo) return false;
+    if (activeSt==='inativo' && a.ativo) return false;
+    if (activeCat && a._cat!==activeCat) return false;
     if (!isNaN(pmin) && !(a.preco_num>=pmin)) return false;
     if (!isNaN(pmax) && !(a.preco_num<=pmax)) return false;
+    if (conf && fpct && !a._conf) return false;
     if (fpct==='acima'  && !(a._pct!=null && a._pct>0)) return false;
     if (fpct==='abaixo' && !(a._pct!=null && a._pct<0)) return false;
     if (fpct && !isNaN(+fpct) && !(a._pct!=null && a._pct<=+fpct)) return false;
-    if (txt   && !(a.titulo||'').toLowerCase().includes(txt)) return false;
-    if (busca && a.busca!==busca) return false;
-    if (activeSt==='hoje'   && !isHoje(a.data_postagem)) return false;
-    if (activeSt==='ativo'  && !a.ativo) return false;
-    if (activeSt==='inativo'&& a.ativo) return false;
     return true;
   });
   ordenarERenderer();
 }
-
-// ── sort ──────────────────────────────────────────────────────────────────────
-function ordenar(col) {
-  document.querySelectorAll('th').forEach(t => t.classList.remove('s-on'));
-  const th = [...document.querySelectorAll('th')].find(t =>
-    t.getAttribute('onclick')=== `ordenar('${col}')`);
-  if (th) th.classList.add('s-on');
-  if (sortCol===col) sortAsc=!sortAsc; else { sortCol=col; sortAsc=true; }
-  ordenarERenderer();
-}
-
 function ordenarERenderer() {
-  filtrados.sort((a,b) => {
-    if (sortCol==='data_postagem') {
-      const va=sortData(a.data_postagem), vb=sortData(b.data_postagem);
-      if (!va) return 1; if (!vb) return -1;
-      return sortAsc?va-vb:vb-va;
-    }
-    if (sortCol==='primeira_coleta' || sortCol==='ultima_coleta') {
-      const va=a[sortCol]||'', vb=b[sortCol]||'';
-      if (!va) return 1; if (!vb) return -1;
-      return sortAsc?va.localeCompare(vb):vb.localeCompare(va);
-    }
-    const va=a[sortCol], vb=b[sortCol];
-    if (va==null) return 1; if (vb==null) return -1;
-    if (typeof va==='number') return sortAsc?va-vb:vb-va;
-    return sortAsc?String(va).localeCompare(String(vb)):String(vb).localeCompare(String(va));
-  });
-  renderTabela(filtrados);
+  const modo = document.getElementById('f-sort').value;
+  const conf = document.getElementById('f-conf').checked;
+  const rec  = a => a.primeira_coleta||'';
+  const cmp = {
+    // confiáveis primeiro, depois maior desconto; sem mediana no fim
+    desconto:   (a,b) => ((conf ? (b._conf-a._conf) : 0) || ((a._pct??1e9) - (b._pct??1e9)) || rec(b).localeCompare(rec(a))),
+    recentes:   (a,b) => rec(b).localeCompare(rec(a)) || (sortData(b.data_postagem)-sortData(a.data_postagem)),
+    preco_asc:  (a,b) => (a.preco_num??1e12) - (b.preco_num??1e12),
+    preco_desc: (a,b) => (b.preco_num??-1) - (a.preco_num??-1),
+    hist:       (a,b) => (b._n - a._n) || ((a._pct??1e9) - (b._pct??1e9)),
+  }[modo];
+  filtrados.sort(cmp);
+  renderLista(filtrados);
 }
+function limparFiltros() {
+  ['busca-input','f-pmin','f-pmax'].forEach(id => document.getElementById(id).value='');
+  document.getElementById('f-pct').value='';
+  document.getElementById('f-sort').value='desconto';
+  document.getElementById('f-conf').checked = true;
+  document.getElementById('f-grp').checked = false;
+  document.querySelectorAll('#chips-cat .chip').forEach((x,i) => x.classList.toggle('on', i===0));
+  activeCat='';
+  setPill(document.querySelector('.pill[data-st="ativo"]'), 'ativo');
+}
+document.getElementById('busca-input').addEventListener('input', aplicarFiltros);
+['f-pmin','f-pmax'].forEach(id => document.getElementById(id).addEventListener('input', aplicarFiltros));
+['f-pct','f-conf','f-grp'].forEach(id => document.getElementById(id).addEventListener('change', aplicarFiltros));
+document.getElementById('f-sort').addEventListener('change', ordenarERenderer);
+document.getElementById('f-reset').addEventListener('click', limparFiltros);
 
 // ── modal ─────────────────────────────────────────────────────────────────────
 function pcCard(nome, preco, olxPreco) {
@@ -948,11 +935,6 @@ document.addEventListener('keydown', e => {
   }
 });
 
-// Also apply filter when typing in search or changing select
-document.getElementById('busca-input').addEventListener('input', aplicarFiltros);
-document.getElementById('filtro-busca').addEventListener('change', aplicarFiltros);
-['f-pmin','f-pmax'].forEach(id => document.getElementById(id).addEventListener('input', aplicarFiltros));
-document.getElementById('f-pct').addEventListener('change', aplicarFiltros);
 
 // ── Mercado Livre competitor prices ──────────────────────────────────────────
 function renderML() {
@@ -990,7 +972,7 @@ function renderML() {
 
 // ── init ──────────────────────────────────────────────────────────────────────
 renderBands();
-renderML();
+try { renderML(); } catch (e) {}
 aplicarFiltros();
 </script>
 </body>
