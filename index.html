@@ -317,6 +317,7 @@ tbody tr:hover { background: var(--s2); }
 .faixa-lbl { position: absolute; left: 0; right: 0; top: 8px; display: flex; justify-content: space-between; font-size: 10.5px; color: var(--muted2); font-variant-numeric: tabular-nums; }
 .ad-meta { display: flex; flex-wrap: wrap; align-items: center; gap: 4px 10px; margin-top: 6px; font-size: 12.5px; color: var(--muted); }
 .ad-meta .hoje { color: var(--accent); font-weight: 600; }
+.novo { background: var(--accent); color: #fff; font-size: 10.5px; font-weight: 700; letter-spacing: .04em; padding: 1px 6px; border-radius: 3px; }
 .st { display: inline-flex; align-items: center; gap: 5px; font-weight: 600; }
 .st::before { content: ""; width: 7px; height: 7px; border-radius: 50%; background: currentColor; }
 .st.on { color: var(--green); } .st.off { color: var(--muted2); }
@@ -373,7 +374,7 @@ tbody tr:hover { background: var(--s2); }
 <!-- Header -->
 <header class="header">
   <h1>Monitor OLX</h1>
-  <p class="sub">Anúncios da OLX no RS com preço de referência por IA · atualizado 02/11/2026 21:14</p>
+  <p class="sub">Anúncios da OLX no RS com preço de referência por IA · atualizado 02/11/2026 21:27</p>
 </header>
 
 <!-- KPIs -->
@@ -625,6 +626,7 @@ DADOS.anuncios.forEach(a => {
   a._conf = a._n >= 3;
   a._cat  = CAT_GRUPO[e.categoria] || 'outro';
   a._nome = e.nome_normalizado || '';
+  a._novo = !!a.primeira_coleta && (Date.now() - new Date(a.primeira_coleta.replace(' ','T')).getTime()) < 864e5;
 });
 const brl = v => 'R$ '+Math.round(v).toLocaleString('pt-BR');
 const escH = t => String(t??'').replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
@@ -678,7 +680,7 @@ function card(a, semNome=false) {
       </div>
       ${faixa(a)}
       <div class="ad-meta">
-        <span class="st ${a.ativo?'on':'off'}">${a.ativo?'Ativo':'Inativo'}</span>
+        ${a._novo?'<span class="novo">NOVO</span>':''}<span class="st ${a.ativo?'on':'off'}">${a.ativo?'Ativo':'Inativo'}</span>
         <span class="${hoje?'hoje':''}">${escH(fmtData(a.data_postagem))}</span>
         <span>${escH(a.cidade||'?')}</span>
         ${e.categoria ? `<span class="cat">${escH(e.categoria)}</span>` : ''}
@@ -763,7 +765,8 @@ function ordenarERenderer() {
     preco_desc: (a,b) => (b.preco_num??-1) - (a.preco_num??-1),
     hist:       (a,b) => (b._n - a._n) || ((a._pct??1e9) - (b._pct??1e9)),
   }[modo];
-  filtrados.sort(cmp);
+  // anúncios das últimas 24h sempre em cima, do mais recente para o mais antigo
+  filtrados.sort((a,b) => (b._novo-a._novo) || (a._novo ? rec(b).localeCompare(rec(a)) : cmp(a,b)));
   renderLista(filtrados);
 }
 function limparFiltros() {
