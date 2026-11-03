@@ -373,7 +373,7 @@ tbody tr:hover { background: var(--s2); }
 <!-- Header -->
 <header class="header">
   <h1>Monitor OLX</h1>
-  <p class="sub">Anúncios da OLX no RS com preço de referência por IA · atualizado 02/11/2026 21:00</p>
+  <p class="sub">Anúncios da OLX no RS com preço de referência por IA · atualizado 02/11/2026 21:14</p>
 </header>
 
 <!-- KPIs -->
@@ -434,6 +434,7 @@ tbody tr:hover { background: var(--s2); }
       <select id="f-pct">
         <option value="">Qualquer</option>
         <option value="-10">10% ou mais abaixo</option>
+        <option value="-15">15% ou mais abaixo</option>
         <option value="-20">20% ou mais abaixo</option>
         <option value="-30">30% ou mais abaixo</option>
         <option value="-50">50% ou mais abaixo</option>
@@ -974,6 +975,18 @@ function renderML() {
 renderBands();
 try { renderML(); } catch (e) {}
 aplicarFiltros();
+
+// ── links diretos (usados pelo email): ?st=&cat=&q=&pct=&sort=&ad= ────────────
+(() => {
+  const u = new URLSearchParams(location.search);
+  if (u.has('q'))    document.getElementById('busca-input').value = u.get('q');
+  if (u.has('pct'))  document.getElementById('f-pct').value = u.get('pct');
+  if (u.has('sort')) document.getElementById('f-sort').value = u.get('sort');
+  if (u.has('cat'))  document.querySelector(`.chip[data-cat="${CSS.escape(u.get('cat'))}"]`)?.click();
+  const pill = u.has('st') ? document.querySelector(`.pill[data-st="${CSS.escape(u.get('st'))}"]`) : null;
+  if (pill) setPill(pill, u.get('st')); else aplicarFiltros();
+  if (u.has('ad') && DADOS.anuncios.some(a => a.olx_id===u.get('ad'))) abrirModal(u.get('ad'));
+})();
 </script>
 </body>
 </html>
